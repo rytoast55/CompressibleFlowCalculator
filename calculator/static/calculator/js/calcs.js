@@ -79,3 +79,29 @@ function calcExpansion(g, M){
     }
 
 }
+
+function calcOblique(g, M, b){
+
+    //Convert beta into radians
+    b = b * Math.PI / 180;
+
+    //Calculate the ratios using the normal portion of the shock
+    output = calcNormalShock(g, M*Math.sin(b))
+
+    //Calculating the rest of the values
+    theta_val = Math.atan( ( 2 / Math.tan(b) ) * ( (M**2) * (Math.sin(b)**2) - 1) / ( (M**2) * (g + Math.cos(2*b) ) + 2 ) );
+    M2_val = Math.sqrt( ( (g-1) * (M*Math.sin(b))**2 + 2) / ( (Math.sin(b-theta_val))**2 * ( 2 * g * (M*Math.sin(b))**2 - (g-1) ) ) )
+
+    //Convert theta into degrees
+    theta_val = theta_val * 180 / Math.PI;
+
+    //Constant for rounding
+    const decimals = Math.pow(10, numDecimals);
+
+    //Adds the additional values to the output dictionary
+    output["theta"] = Math.round(theta_val * decimals) / decimals;
+    output["M2"] = Math.round(M2_val * decimals) / decimals;
+
+    return output;
+
+}
