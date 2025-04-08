@@ -9,6 +9,7 @@ Out: Po/P, To/T, Rhoo/Rho
 {% block scripts %}
 
     <script src="{% static 'calculator/js/isentropic.js' %}" defer></script>
+    <script src="{% static 'calculator/js/calcs.js' %}" defer></script>
 
 {% endblock %}
 
@@ -29,7 +30,7 @@ Out: Po/P, To/T, Rhoo/Rho
                 <div class="box center">
                     
                     <img src="{% static 'calculator/media/gamma_icon.png' %}" alt="gamma" width="65" height="65">
-                    <input name="gamma" type="number" onChange="update_gamma(this.value);" />
+                    <input name="gamma" type="number" onChange="update_gamma(this.value);" value="1.4" />
 
                 </div>
             </fieldset>
@@ -47,7 +48,7 @@ Out: Po/P, To/T, Rhoo/Rho
                 </div>
             </fieldset>
         </div>
-        
+
     </div>
 
     <!--Thw boxes containing the calculated results-->
