@@ -1,8 +1,9 @@
 
 //References to the output fields on the page
-let P_out = document.getElementById("P_o/P-out");
-let T_out = document.getElementById("T_o/T-out");
-let rho_out = document.getElementById("rho_o/rho-out");
+let u_out = document.getElementById("u/a1");
+let P_out = document.getElementById("P/P1");
+let T_out = document.getElementById("T/T1");
+let d_out = document.getElementById("d/d1");
 
 //Updates the value for gamma and tries to recalculate results
 function update_gamma(val){
@@ -30,24 +31,27 @@ function solve_state(){
         let M = Number(M_val)
 
         //Calculates the isentropic values
-        results = calcIsentropic(g, M);
+        let results = calcExpansion(g, M);
 
         //Saves the values for displaying
-        t_val = results["T_o/T"]
-        p_val = results["P_o/P"]
-        d_val = results["d_o/d"]
+        var u_val = results["u/a1"]
+        var t_val = results["T/T1"]
+        var p_val = results["P/P1"]
+        var d_val = results["d/d1"]
     }
     else{
         
         //One or more inputs isn't define, wipe the output fields
-        t_val = "";
-        p_val = "";
-        d_val = "";
+        var u_val = "";
+        var t_val = "";
+        var p_val = "";
+        var d_val = "";
     }
 
     //Update the input fields with the calculated values
+    changeVal(u_out, u_val);
     changeVal(T_out, t_val);
     changeVal(P_out, p_val);
-    changeVal(rho_out, d_val);
+    changeVal(d_out, d_val);
 
 }

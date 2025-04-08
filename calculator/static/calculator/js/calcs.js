@@ -22,7 +22,7 @@ function calcIsentropic(g, M){
     //Constant for rounding
     const decimals = Math.pow(10, numDecimals);
 
-    //Retunrs the rounded values as a dictionary
+    //Returns the rounded values as a dictionary
     return {
         "T_o/T": Math.round(t_val * decimals) / decimals,
         "P_o/P": Math.round(p_val * decimals) / decimals,
@@ -55,6 +55,27 @@ function calcNormalShock(g, M){
         "Po2/P1": Math.round(Po2_P1_val * decimals) / decimals,
         "du/a1": Math.round(du_a1_val * decimals) / decimals,
         "M2": Math.round(M2_val * decimals) / decimals,
+    }
+
+}
+
+function calcExpansion(g, M){
+    
+    //Calculating the values
+    let u_val = M / (1 + ((g - 1) / 2) * M);
+    let t_val = (1 + (M**2) * (g-1) / 2) ** (-1);
+    let p_val = t_val ** (g / (g-1));
+    let d_val = t_val ** (1 / (g-1));
+
+    //Constant for rounding
+    const decimals = Math.pow(10, numDecimals);
+
+    //Returns the rounded values as a dictionary
+    return {
+        "u/a1":  Math.round(u_val * decimals) / decimals,
+        "T/T1": Math.round(t_val * decimals) / decimals,
+        "P/P1": Math.round(p_val * decimals) / decimals,
+        "d/d1": Math.round(d_val * decimals) / decimals,
     }
 
 }

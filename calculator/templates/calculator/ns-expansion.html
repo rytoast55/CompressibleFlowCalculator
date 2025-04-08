@@ -1,15 +1,111 @@
 {% extends 'calculator/base.html' %}
+{% load static %}
 
 <!--
 In: gamma, mach
 Out: u/a1, P/P1, T/T1, Rho/Rho1
 -->
 
+{% block scripts %}
+
+    <script src="{% static 'calculator/js/calcs.js' %}" defer></script>
+    <script src="{% static 'calculator/js/ns_expansion.js' %}" defer></script>
+
+{% endblock %}
+
 {% block body %}
 
+    
 <main class="container">
+    
+    <h1>Nonsteady Expansions</h1>
 
-    <h1>Non-Steady Expansions</h1>
+    <!--The grid containing the input parameter fields-->
+    <div class="grid">
+        
+        <!--First Col-->
+        <div>
+            <!--Gamma input field-->
+            <fieldset role="group">
+                <div class="box center">
+                    
+                    <img src="{% static 'calculator/media/gamma_icon.png' %}" alt="gamma" width="65" height="65">
+                    <input name="gamma" type="number" onChange="update_gamma(this.value);" value="1.4" />
+
+                </div>
+            </fieldset>
+        </div>
+
+        <!--Second Col-->
+        <div>
+            <!--Mach number input field-->
+            <fieldset role="group">
+                <div class="box center">
+
+                    <img src="{% static 'calculator/media/M_icon.png' %}" alt="M" width="65" height="65">
+                    <input name="mach" type="number" onChange="update_mach(this.value);" />
+
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+
+    <!--Thw boxes containing the calculated results-->
+
+    <div class="grid">
+
+        <!--First Col-->
+        <div>
+            <!--Pressure Ratio-->
+            <fieldset role="group">
+                <div class="box center">
+                    
+                    <img src="{% static 'calculator/media/P_P1_icon.png' %}" alt="P/P1" width="65" height="65">
+                    <input type="number" id="P/P1" readonly />
+
+                </div>
+            </fieldset>
+
+            <!--Speed-->
+            <fieldset role="group">
+                <div class="box center">
+                    
+                    <img src="{% static 'calculator/media/u_a1_icon.png' %}" alt="u/a1" width="65" height="65">
+                    <input type="number" id="u/a1" readonly />
+
+                </div>
+            </fieldset>
+        </div>
+
+        <!--Second Col-->
+        <div>
+            <!--Temperature Ratio-->
+            <fieldset role="group">
+                <div class="box center">
+
+                    <img src="{% static 'calculator/media/T_T1_icon.png' %}" alt="T/T1" width="65" height="65">
+                    <input type="number" id="T/T1" readonly />
+
+                </div>
+            </fieldset>
+        </div>
+
+        <!--Third Col-->
+        <div>
+            <!--Density Ratio-->
+            <fieldset role="group">
+                <div class="box center">
+
+                    <img src="{% static 'calculator/media/rho_rho1_icon.png' %}" alt="rho/rho1" width="65" height="65">
+                    <input type="number" id="d/d1" readonly />
+
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+
 
 </main>
 
