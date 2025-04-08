@@ -6,6 +6,11 @@ In: gamma, mach
 Out: Po/P, To/T, Rhoo/Rho
 -->
 
+{% block scripts %}
+
+    <script src="{% static 'calculator/js/isentropic.js' %}" defer></script>
+
+{% endblock %}
 
 {% block body %}
 
@@ -24,7 +29,7 @@ Out: Po/P, To/T, Rhoo/Rho
                 <div class="box center">
                     
                     <img src="{% static 'calculator/media/gamma_icon.png' %}" alt="gamma" width="65" height="65">
-                    <input name="gamma" type="number" />
+                    <input name="gamma" type="number" onChange="update_gamma(this.value);" />
 
                 </div>
             </fieldset>
@@ -37,21 +42,12 @@ Out: Po/P, To/T, Rhoo/Rho
                 <div class="box center">
 
                     <img src="{% static 'calculator/media/M_icon.png' %}" alt="M" width="65" height="65">
-                    <input name="mach" type="number" />
+                    <input name="mach" type="number" onChange="update_mach(this.value);" />
 
                 </div>
             </fieldset>
         </div>
-
-        <!--Third Col-->
-        <div>
-            <!--Calculate button-->
-            <div class="box center">
-
-                <button>Calculate</button>
-
-            </div>
-        </div>
+        
     </div>
 
     <!--Thw boxes containing the calculated results-->
@@ -65,7 +61,7 @@ Out: Po/P, To/T, Rhoo/Rho
                 <div class="box center">
                     
                     <img src="{% static 'calculator/media/Po_P_icon.png' %}" alt="P_o/P" width="65" height="65">
-                    <input name="P_o/P" type="number" readonly />
+                    <input name="P_o/P" type="number" id="P_o/P-out" readonly />
 
                 </div>
             </fieldset>
@@ -78,7 +74,7 @@ Out: Po/P, To/T, Rhoo/Rho
                 <div class="box center">
 
                     <img src="{% static 'calculator/media/To_T_icon.png' %}" alt="T_o/T" width="65" height="65">
-                    <input name="T_o/T" type="number" readonly />
+                    <input name="T_o/T" type="number" id="T_o/T-out" readonly />
 
                 </div>
             </fieldset>
@@ -91,7 +87,7 @@ Out: Po/P, To/T, Rhoo/Rho
                 <div class="box center">
 
                     <img src="{% static 'calculator/media/rhoo_rho_icon.png' %}" alt="rho_o/rho" width="65" height="65">
-                    <input name="rho_o/rho" type="number" readonly />
+                    <input name="rho_o/rho" type="number" id="rho_o/rho-out" readonly />
 
                 </div>
             </fieldset>
