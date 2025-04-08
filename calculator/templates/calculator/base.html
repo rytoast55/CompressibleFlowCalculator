@@ -1,0 +1,91 @@
+{% load static %}
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="{% static 'calculator/css/pico.min.css' %}">
+    <title> {% block title %} Compressible Flow Calculator {% endblock %}</title>
+
+    {% block additional_head_content %}
+    {% endblock %}
+
+    <style>
+      .grid {
+          display: grid;
+          /* grid-template-columns: repeat(3, 1fr); */
+          gap: 2rem;
+          padding: 2rem;
+        }
+      
+        .box {
+          background-color: #e0f0ff;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          height: 80px;
+        }
+
+        .center {
+        display: flex;
+        align-items: center;   /* vertical centering */
+        justify-content: center; /* optional: horizontal centering */
+        height: 100px;          /* needs some height to center inside */
+        }
+
+        body, html {
+          height: 100%;
+          margin: 0;
+        }
+
+        body {
+          display: flex;
+          flex-direction: column;
+        }
+
+        main {
+          flex: 1; /* this pushes the footer down */
+        }
+
+        footer {
+          text-align: center;
+          padding: 1rem;
+          background: #f1f1f1;
+        }
+          
+        /* Custom layout shaping — optional */
+        .box:nth-child(1) { grid-column: span 2; }
+        .box:nth-child(3) { grid-column: span 2; }
+      </style>
+</head>
+
+<body>
+    <nav class="container">
+        
+        <ul>
+          <li><a href="{% url 'calculator:index' %}"><strong>Compressible Flow Calculator</strong></a></li>
+        </ul>
+    
+        <ul>
+          <li><a href="{% url 'calculator:back-solve' %}" class="outline">Backwards Solve</a></li>
+          <li><a href="{% url 'calculator:isentropic' %}" class="contrast">Isentropic Flow</a></li>
+          <li><a href="{% url 'calculator:normal-shock' %}" class="contrast">Normal Shock</a></li>
+          <li><a href="{% url 'calculator:ns-expansion' %}" class="contrast">Non-Steady Expansion</a></li>
+          <li><a href="{% url 'calculator:oblique-shock' %}" class="contrast">Oblique Shock</a></li>
+          <li><a href="{% url 'calculator:pm-expansion' %}" class="contrast">Prandtl-Meyers Expansion</a></li>
+          <li><a href="{% url 'calculator:tables' %}" class="outline">Tables</a></li>
+        </ul>
+    </nav>
+    <hr />
+
+    {% block body %}
+    {% endblock %}
+</body>
+
+<footer class="text-body-secondary py-5">
+    <div class="container">
+      <p class="mb-1">Site created by Ryan Hoff, for use in EMAE 359. Use as you see fit.</p>
+    </div>
+</footer>
+
+</html>
