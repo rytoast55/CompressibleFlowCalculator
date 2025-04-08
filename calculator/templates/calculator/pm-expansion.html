@@ -1,15 +1,83 @@
 {% extends 'calculator/base.html' %}
+{% load static %}
 
 <!--
 In: gamma, mach
 Out: theta(M)
 -->
 
+{% block scripts %}
+
+    <script src="{% static 'calculator/js/calcs.js' %}" defer></script>
+    <script src="{% static 'calculator/js/prandtl_meyer.js' %}" defer></script>
+
+{% endblock %}
+
 {% block body %}
 
+    
 <main class="container">
+    
+    <h1>Prandtl Meyer Expansions</h1>
 
-    <h1>Prandtl-Meyers Expansions</h1>
+    <!--The grid containing the input parameter fields-->
+    <div class="grid">
+        
+        <!--First Col-->
+        <div>
+            <!--Gamma input field-->
+            <fieldset role="group">
+                <div class="box center">
+                    
+                    <img src="{% static 'calculator/media/gamma_icon.png' %}" alt="gamma" width="65" height="65">
+                    <input name="gamma" type="number" onChange="update_gamma(this.value);" value="1.4" />
+
+                </div>
+            </fieldset>
+        </div>
+
+        <!--Second Col-->
+        <div>
+            <!--Mach number input field-->
+            <fieldset role="group">
+                <div class="box center">
+
+                    <img src="{% static 'calculator/media/M_icon.png' %}" alt="M" width="65" height="65">
+                    <input name="mach" type="number" onChange="update_mach(this.value);" />
+
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+
+    <!--Thw boxes containing the calculated results-->
+
+    <div class="grid">
+
+        <!--First Col-->
+        <div>
+            <!--Stagnation pressure ratio-->
+            <fieldset role="group">
+                <div class="box center">
+                    
+                    <img src="{% static 'calculator/media/theta_m_icon.png' %}" alt="theta_m" width="65" height="65">
+                    <input type="number" id="theta-out" readonly />
+
+                </div>
+            </fieldset>
+        </div>
+
+        <div>
+
+        </div>
+
+        <div>
+            
+        </div>
+
+    </div>
+
 
 </main>
 

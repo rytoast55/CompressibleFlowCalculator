@@ -105,3 +105,9 @@ function calcOblique(g, M, b){
     return output;
 
 }
+
+function calcPrandtlMeyer(g, M){
+
+    angle =  Math.sqrt( (g+1)/(g-1) ) * Math.atan( Math.sqrt( ((g-1)/(g+1)) * (M**2 - 1) ) ) - Math.atan( Math.sqrt( M**2 - 1 ) );
+    return angle * 180 / Math.PI;
+}
