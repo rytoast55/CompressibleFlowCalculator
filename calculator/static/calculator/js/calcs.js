@@ -18,6 +18,7 @@ function calcIsentropic(g, M){
     let t_val = 1 + (M**2) * (g-1) / 2;
     let p_val = t_val ** (g / (g-1));
     let d_val = t_val ** (1 / (g-1));
+    let a_val = (1/M) * ( (2/(g+1)) * (1 + (M**2) * (g-1)/2)) ** ( (g+1)/(2 * (g-1)));
 
     //Constant for rounding
     const decimals = Math.pow(10, numDecimals);
@@ -27,6 +28,7 @@ function calcIsentropic(g, M){
         "T_o/T": Math.round(t_val * decimals) / decimals,
         "P_o/P": Math.round(p_val * decimals) / decimals,
         "d_o/d": Math.round(d_val * decimals) / decimals,
+        "A_A*":  Math.round(a_val * decimals) / decimals,
     }
 
 }
@@ -37,8 +39,8 @@ function calcNormalShock(g, M){
     let P2_P1_val = (2 * g * (M ** 2) - (g-1)) / (g+1);
     let T2_T1_val = (2 * g * (M ** 2) - (g-1)) * ((g-1) * (M ** 2) + 2) / ((M ** 2) * (g+1) ** 2);
     let d2_d1_val = ((M ** 2) * (g+1)) / ((M ** 2) * (g-1) + 2);
-    let Po2_Po1_val = ( ( ( (g+1) * M**2 ) / ( (g-1) * M**2 + 2 ) ) ** ( g / (g-1) ) ) * ( (g+1) / ( ( 2 * g * M**2) - (g-1)) ) ** (1 / (g-1))
-    let Po2_P1_val = ( ( ( (g+1) * M**2 ) / 2 ) ** ( g / (g-1) ) ) * ( (g+1) / ( ( 2 * g * M**2) - (g-1)) ) ** (1 / (g-1))
+    let Po2_Po1_val = ( ( ( (g+1) * M**2 ) / ( (g-1) * M**2 + 2 ) ) ** ( g / (g-1) ) ) * ( (g+1) / ( ( 2 * g * M**2) - (g-1)) ) ** (1 / (g-1));
+    let Po2_P1_val = ( ( ( (g+1) * M**2 ) / 2 ) ** ( g / (g-1) ) ) * ( (g+1) / ( ( 2 * g * M**2) - (g-1)) ) ** (1 / (g-1));
     let du_a1_val = -2 * (M - (1/M)) / (g+1);
     let M2_val = Math.sqrt(((M**2) + 2 / (g-1)) / ((M**2) * 2 * g / (g-1) - 1));
 
@@ -63,7 +65,7 @@ function calcExpansion(g, M){
     
     //Calculating the values
     let u_val = M / (1 + ((g - 1) / 2) * M);
-    let t_val = (1 + (M**2) * (g-1) / 2) ** (-1);
+    let t_val = (1 + M * (g-1) / 2) ** (-2);
     let p_val = t_val ** (g / (g-1));
     let d_val = t_val ** (1 / (g-1));
 
@@ -72,7 +74,7 @@ function calcExpansion(g, M){
 
     //Returns the rounded values as a dictionary
     return {
-        "u/a1":  Math.round(u_val * decimals) / decimals,
+        "u/a1": Math.round(u_val * decimals) / decimals,
         "T/T1": Math.round(t_val * decimals) / decimals,
         "P/P1": Math.round(p_val * decimals) / decimals,
         "d/d1": Math.round(d_val * decimals) / decimals,
@@ -90,7 +92,7 @@ function calcOblique(g, M, b){
 
     //Calculating the rest of the values
     theta_val = Math.atan( ( 2 / Math.tan(b) ) * ( (M**2) * (Math.sin(b)**2) - 1) / ( (M**2) * (g + Math.cos(2*b) ) + 2 ) );
-    M2_val = Math.sqrt( ( (g-1) * (M*Math.sin(b))**2 + 2) / ( (Math.sin(b-theta_val))**2 * ( 2 * g * (M*Math.sin(b))**2 - (g-1) ) ) )
+    M2_val = Math.sqrt( ( (g-1) * (M*Math.sin(b))**2 + 2) / ( (Math.sin(b-theta_val))**2 * ( 2 * g * (M*Math.sin(b))**2 - (g-1) ) ) );
 
     //Convert theta into degrees
     theta_val = theta_val * 180 / Math.PI;

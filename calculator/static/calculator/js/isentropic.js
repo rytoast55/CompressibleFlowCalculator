@@ -3,6 +3,7 @@
 let P_out = document.getElementById("P_o/P-out");
 let T_out = document.getElementById("T_o/T-out");
 let rho_out = document.getElementById("rho_o/rho-out");
+let A_out = document.getElementById("A/A*-out");
 
 //Updates the value for gamma and tries to recalculate results
 function update_gamma(val){
@@ -36,6 +37,7 @@ function solve_state(){
         t_val = results["T_o/T"]
         p_val = results["P_o/P"]
         d_val = results["d_o/d"]
+        a_val = results["A_A*"]
     }
     else{
         
@@ -43,11 +45,13 @@ function solve_state(){
         t_val = "";
         p_val = "";
         d_val = "";
+        a_val = "";
     }
 
     //Update the input fields with the calculated values
     changeVal(T_out, t_val);
     changeVal(P_out, p_val);
     changeVal(rho_out, d_val);
+    changeVal(A_out, a_val);
 
 }
