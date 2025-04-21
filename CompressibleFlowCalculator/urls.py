@@ -23,6 +23,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import settings
 
 urlpatterns = [
-    path('', include('calculator.urls'), name='calculator'),
+    path('calculator/', include('calculator.urls'), name='calculator'),
     path('admin/', admin.site.urls),
 ]
